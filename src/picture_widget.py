@@ -35,8 +35,9 @@ class DWEPictureWidget(Gtk.Box):
 		self._transition_time_lock = False
 
 	def build_ui(self, stt, trt, template, w, h):
+		print("temlate: ", template)
 		builder = Gtk.Builder().new_from_resource(UI_PATH + template)
-		pic_box = builder.get_object('pic_box')
+		pic_box = builder.get_object("pic_box")
 		self.time_box = builder.get_object('time_box')
 
 		# Thumbnail
@@ -69,21 +70,23 @@ class DWEPictureWidget(Gtk.Box):
 		self.static_time_btn.connect('value-changed', self.on_static_changed)
 		self.trans_time_btn.connect('value-changed', self.on_transition_changed)
 
+		#TODO FIX Drag and drop
 		# Ability to be dragged
-		pic_box.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, None, Gdk.DragAction.MOVE)
-		pic_box.connect('drag-data-get', self.on_drag_data_get)
-		pic_box.drag_source_add_text_targets()
+		# pic_box.drag_source_set(Gdk.ModifierType.BUTTON1_MASK, None, Gdk.DragAction.MOVE)
+		# pic_box.connect('drag-data-get', self.on_drag_data_get)
+		# pic_box.drag_source_add_text_targets()
 
 		# Ability to receive drop
-		self.drag_dest_set(Gtk.DestDefaults.ALL, [], Gdk.DragAction.MOVE)
-		self.connect('drag-data-received', self.on_drag_data_received)
-		self.drag_dest_add_text_targets()
-
-		self.add(pic_box)
+		# self.drag_dest_set(Gtk.DestDefaults.ALL, [], Gdk.DragAction.MOVE)
+		# self.connect('drag-data-received', self.on_drag_data_received)
+		# self.drag_dest_add_text_targets()
+		print("Picbox:", pic_box)
+		self.append(pic_box)
 		return builder
 
 	def end_build_ui(self):
-		self.show_all()
+		#TODO CHECK IF NESS
+		# self.show_all()
 		is_global = self.window.lookup_action('same_duration').get_state()
 		is_daylight = self.window.lookup_action('total_24').get_state()
 		self.update_to_type(is_global, is_daylight)

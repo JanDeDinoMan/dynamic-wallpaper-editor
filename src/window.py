@@ -475,33 +475,42 @@ class DWEWindow(Gtk.ApplicationWindow):
 	############################################################################
 	# Adding pictures to the view ##############################################
 
-	def action_add_folder(self, *args):
-		"""Run an "open" dialog and create a list of DWEPictureRow from the
-		result. The actual paths are needed in XML files, so it can't be a
-		'native dialog' (system's portal)."""
-		self.status_bar.push(1, _("Loading…"))
-		file_chooser = Gtk.FileChooserDialog(_("Add a folder"), self,
-		               Gtk.FileChooserAction.SELECT_FOLDER,
-		               (Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL,
-		               Gtk.STOCK_OPEN, Gtk.ResponseType.OK),
-		               select_multiple=False)
-
-		response = file_chooser.run()
+	def on_response_folder(self, file_chooser, response: Gtk.ResponseType, _dialog) -> None:
 		if response == Gtk.ResponseType.OK:
 			self.update_time_lock = True
+			print()
 			enumerator = file_chooser.get_file().enumerate_children('standard::*', \
 			             Gio.FileQueryInfoFlags.NONE, None)
 			f = enumerator.next_file(None)
 			array = []
 			while f is not None:
 				if 'image/' in f.get_content_type():
-					array.append(file_chooser.get_filename() + '/' + f.get_display_name())
+					array.append(file_chooser.get_file().get_path()+"/"+f.get_name())
 				f = enumerator.next_file(None)
 			self._add_pictures_from_untimed_list(array)
 			self.update_time_lock = False
 			self.on_time_change()
 		self.status_bar.pop(1)
 		file_chooser.destroy()
+
+
+	def action_add_folder(self, *args):
+		"""Run an "open" dialog and create a list of DWEPictureRow from the
+		result. The actual paths are needed in XML files, so it can't be a
+		'native dialog' (system's portal)."""
+		self.status_bar.push(1, _("Loading…"))
+		file_chooser = Gtk.FileChooserDialog(title="Add a folder", transient_for=self, action=Gtk.FileChooserAction.SELECT_FOLDER)
+		file_chooser.add_buttons(_("_Cancel"), Gtk.ResponseType.CANCEL, _("_Select"), Gtk.ResponseType.OK)
+		file_chooser.select_multiple=False
+		btn_select = file_chooser.get_widget_for_response(response_id=Gtk.ResponseType.OK,)
+		btn_select.get_style_context().add_class(class_name='suggested-action')
+
+		btn_cancel = file_chooser.get_widget_for_response(response_id=Gtk.ResponseType.CANCEL,)
+		btn_cancel.get_style_context().add_class(class_name='destructive-action')
+		file_chooser.connect("response", self.on_response_folder, file_chooser)
+		file_chooser.show()
+
+
 
 	def action_add(self, *args):
 		"""Run an "open" dialog and create a list of DWEPictureRow from the result.
@@ -558,14 +567,7 @@ class DWEWindow(Gtk.ApplicationWindow):
 	############################################################################
 	# Opening an XML file ######################################################
 
-	def action_open(self, *args):
-		if not self.confirm_save_modifs():
-			return
-		self.status_bar.push(1, _("Loading…"))
-		file_chooser = Gtk.FileChooserNative.new(_("Open"), self, \
-		                     Gtk.FileChooserAction.OPEN, _("Open"), _("Cancel"))
-		add_xml_dialog_filters(file_chooser)
-		response = file_chooser.run()
+	def on_response_xml(self, _dialog: Gtk.Dialog, response: Gtk.ResponseType, file_chooser) -> None:
 		if response == Gtk.ResponseType.ACCEPT:
 			self.update_time_lock = True
 			self.load_gfile(file_chooser.get_file())
@@ -573,6 +575,16 @@ class DWEWindow(Gtk.ApplicationWindow):
 			self.on_time_change()
 		file_chooser.destroy()
 		self.status_bar.pop(1)
+
+	def action_open(self, *args):
+		if not self.confirm_save_modifs():
+			return
+		self.status_bar.push(1, _("Loading…"))
+		file_chooser = Gtk.FileChooserNative.new(_("Open"), self, \
+		                     Gtk.FileChooserAction.OPEN, _("Open"), _("Cancel"))
+		add_xml_dialog_filters(file_chooser)
+		file_chooser.connect("response", self.on_response_xml   , file_chooser)
+		file_chooser.show()
 
 	def load_gfile(self, gfile):
 		self.gio_file = gfile

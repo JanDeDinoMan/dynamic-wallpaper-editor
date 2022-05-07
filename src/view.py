@@ -281,11 +281,12 @@ class DWERowsView(DWEAbstractView):
 		super().__init__(window)
 		# self.list_box = Gtk.ListBox(visible=True, expand=True)
 		#TODO port the expand
-		self.list_box = Gtk.ListBox(visible=True)
+		self.list_box = Gtk.ListBox(visible=True, hexpand=True, vexpand=True)
 		label = Gtk.Label(visible=True, \
 		             label=_("Add new pictures, or open an existing XML file."))
 		self.list_box.set_placeholder(label)
 		self._add_list_container(self.list_box)
+		print("size", self.list_box.get_width())
 
 	def get_view_widget(self):
 		return self.list_box
@@ -300,7 +301,7 @@ class DWERowsView(DWEAbstractView):
 	def _add_one_picture(self, pic_structure):
 		self.set_unsaved()
 		row = DWEPictureRow(pic_structure, self.window)
-		self.list_box.add(row)
+		self.list_box.append(row)
 		self.children.append(row)
 
 	############################################################################

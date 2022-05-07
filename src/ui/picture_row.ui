@@ -12,130 +12,124 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkEventBox" id="pic_box">
-    <property name="visible">True</property>
-    <property name="expand">True</property>
+  <object class="GtkBox">
+    <property name="margin-top">2</property>
+    <property name="margin-bottom">2</property>
+    <property name="margin-end">18</property>
+    <property name="margin-start">18</property>
+    <property name="spacing">5</property>
+    <child>
+      <object class="GtkImage" id="pic_thumbnail">
+        <property name="hexpand">0</property>
+        <property name="vexpand">0</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkBox" id="pic_box">
+        <property name="homogeneous">1</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkLabel" id="pic_label">
+            <property name="label">picture name</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="static_label">
+            <property name="label">static label</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkLabel" id="transition_label">
+            <property name="label">transition label</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
+          </object>
+        </child>
+      </object>
+    </child>
     <child>
       <object class="GtkBox">
-        <property name="margin-top">2</property>
-        <property name="margin-bottom">2</property>
-        <property name="margin-end">18</property>
-        <property name="margin-start">18</property>
         <property name="spacing">5</property>
         <child>
-          <object class="GtkImage" id="pic_thumbnail">
+          <object class="GtkGrid" id="time_box">
             <property name="hexpand">0</property>
             <property name="vexpand">0</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="homogeneous">1</property>
-            <property name="orientation">vertical</property>
+            <property name="row-spacing">5</property>
+            <property name="column-spacing">5</property>
             <child>
-              <object class="GtkLabel" id="pic_label">
-                <property name="label">picture name</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="static_label">
-                <property name="label">static label</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-            <child>
-              <object class="GtkLabel" id="transition_label">
-                <property name="label">transition label</property>
-                <style>
-                  <class name="dim-label"/>
-                </style>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
-          <object class="GtkBox">
-            <property name="spacing">5</property>
-            <child>
-              <object class="GtkGrid" id="time_box">
+              <object class="GtkLabel">
                 <property name="hexpand">0</property>
                 <property name="vexpand">0</property>
-                <property name="row-spacing">5</property>
-                <property name="column-spacing">5</property>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="label" translatable="1">Time</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">0</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSpinButton" id="static_btn">
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="tooltip_text" translatable="1">Time (in seconds) of this image. This doesn&apos;t include the time of the transition.</property>
-                    <property name="adjustment">adjustment_st</property>
-                    <layout>
-                      <property name="column">1</property>
-                      <property name="row">0</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkLabel">
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="label" translatable="1">Transition</property>
-                    <layout>
-                      <property name="column">0</property>
-                      <property name="row">1</property>
-                    </layout>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSpinButton" id="transition_btn">
-                    <property name="hexpand">0</property>
-                    <property name="vexpand">0</property>
-                    <property name="tooltip_text" translatable="1">Time (in seconds) of the transition between this image and the next one.</property>
-                    <property name="adjustment">adjustment_tr</property>
-                    <layout>
-                      <property name="column">1</property>
-                      <property name="row">1</property>
-                    </layout>
-                  </object>
-                </child>
+                <property name="label" translatable="1">Time</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
               </object>
             </child>
             <child>
-              <object class="GtkMenuButton" id="menu_btn">
-                <property name="relief">none</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">view-more-symbolic</property>
-                  </object>
-                </child>
+              <object class="GtkSpinButton" id="static_btn">
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="tooltip_text" translatable="1">Time (in seconds) of this image. This doesn&apos;t include the time of the transition.</property>
+                <property name="adjustment">adjustment_st</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="delete_btn">
-                <property name="relief">none</property>
-                <property name="valign">center</property>
-                <property name="tooltip_text" translatable="1">Delete</property>
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">edit-delete-symbolic</property>
-                  </object>
-                </child>
+              <object class="GtkLabel">
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Transition</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="transition_btn">
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="tooltip_text" translatable="1">Time (in seconds) of the transition between this image and the next one.</property>
+                <property name="adjustment">adjustment_tr</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="menu_btn">
+            <!-- <property name="relief">none</property> -->
+            <property name="valign">center</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">view-more-symbolic</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="delete_btn">
+            <!-- <property name="relief">none</property> -->
+            <property name="valign">center</property>
+            <property name="tooltip_text" translatable="1">Delete</property>
+            <style>
+              <class name="destructive-action"/>
+            </style>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">edit-delete-symbolic</property>
               </object>
             </child>
           </object>
