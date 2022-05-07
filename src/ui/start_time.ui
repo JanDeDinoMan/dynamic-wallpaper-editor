@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface domain="dynamic-wallpaper-editor">
-
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="adjustment_year">
     <property name="lower">1970</property>
     <property name="upper">2025</property>
@@ -23,201 +23,201 @@
     <property name="value">1</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_hour">
-    <property name="lower">0</property>
     <property name="upper">23</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
     <property name="value">6</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_minute">
-    <property name="lower">0</property>
     <property name="upper">59</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <property name="value">0</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_second">
-    <property name="lower">0</property>
     <property name="upper">59</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <property name="value">0</property>
   </object>
-
   <object class="GtkPopover" id="start_time_popover">
     <property name="visible">False</property>
-    <child>
+    <property name="child">
       <object class="GtkBox">
         <property name="visible">True</property>
-        <property name="margin">10</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
         <property name="spacing">10</property>
         <property name="orientation">vertical</property>
-        <property name="tooltip_text" translatable="yes">This is useful when the total duration is 24 hours.</property>
+        <property name="tooltip_text" translatable="1">This is useful when the total duration is 24 hours.</property>
         <child>
           <object class="GtkLabel">
             <property name="visible">True</property>
-            <property name="label" translatable="yes">Start time of the wallpaper</property>
-            <style><class name="dim-label"/></style>
+            <property name="label" translatable="1">Start time of the wallpaper</property>
+            <style>
+              <class name="dim-label"/>
+            </style>
           </object>
-          <packing>
-            <property name="pack-type">start</property>
-          </packing>
         </child>
-
         <child>
           <object class="GtkGrid">
             <property name="visible">True</property>
-            <property name="expand">False</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
             <property name="row-spacing">5</property>
             <property name="column-spacing">20</property>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Year</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Year</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">0</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="year_spinbtn">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_year</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">0</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Month</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Month</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">1</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="month_spinbtn">
                 <property name="visible">True</property>
-                <property name="wrap">True</property>
-                <property name="expand">False</property>
+                <property name="wrap">1</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_month</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">1</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Day</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Day</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">2</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">2</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="day_spinbtn">
                 <property name="visible">True</property>
-                <property name="wrap">True</property>
-                <property name="expand">False</property>
+                <property name="wrap">1</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_day</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">2</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">2</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Hour</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Hour</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">3</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">3</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="hour_spinbtn">
                 <property name="visible">True</property>
-                <property name="wrap">True</property>
-                <property name="expand">False</property>
+                <property name="wrap">1</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_hour</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">3</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">3</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Minute</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Minute</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">4</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">4</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="minute_spinbtn">
                 <property name="visible">True</property>
-                <property name="wrap">True</property>
-                <property name="expand">False</property>
+                <property name="wrap">1</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_minute</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">4</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">4</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkLabel">
                 <property name="visible">True</property>
-                <property name="expand">False</property>
-                <property name="label" translatable="yes">Second</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
+                <property name="label" translatable="1">Second</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">5</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">0</property>
-                <property name="top-attach">5</property>
-              </packing>
             </child>
             <child>
               <object class="GtkSpinButton" id="second_spinbtn">
                 <property name="visible">True</property>
-                <property name="wrap">True</property>
-                <property name="expand">False</property>
+                <property name="wrap">1</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="adjustment">adjustment_second</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">5</property>
+                </layout>
               </object>
-              <packing>
-                <property name="left-attach">1</property>
-                <property name="top-attach">5</property>
-              </packing>
             </child>
-
           </object>
         </child>
       </object>
-    </child>
+    </property>
   </object>
 </interface>
-

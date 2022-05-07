@@ -1,14 +1,15 @@
 {
 	"app-id" : "com.github.maoschanz.DynamicWallpaperEditor",
 	"runtime" : "org.gnome.Platform",
-	"runtime-version" : "41",
+	"runtime-version" : "master",
 	"sdk" : "org.gnome.Sdk",
 	"command" : "dynamic-wallpaper-editor",
 	"finish-args" : [
 		"--share=ipc",
 		"--socket=x11",
 		"--socket=wayland",
-		"--filesystem=home:ro"
+		"--filesystem=home:ro",
+		"--device=dri"
 	],
 	"modules" : [{
 		"name" : "dynamic-wallpaper-editor",

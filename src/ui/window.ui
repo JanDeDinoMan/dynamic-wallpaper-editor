@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface domain="dynamic-wallpaper-editor">
-
+  <requires lib="gtk" version="4.0"/>
   <object class="GtkAdjustment" id="adjustment_st">
-    <property name="lower">0</property>
     <property name="upper">172800</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
     <property name="value">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_tr">
-    <property name="lower">0</property>
     <property name="upper">43200</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-    <property name="value">0</property>
   </object>
-
   <template class="DWEWindow" parent="GtkApplicationWindow">
     <property name="default-width">800</property>
     <property name="default-height">500</property>
-
     <child type="titlebar">
       <object class="GtkHeaderBar" id="header_bar">
         <property name="visible">True</property>
-        <property name="show-close-button">True</property>
-        <property name="title" translatable="yes">Dynamic Wallpaper Editor</property>
-
+        <!-- <property name="title" translatable="1">Dynamic Wallpaper Editor</property> -->
         <child>
           <object class="GtkButton" id="open_btn">
             <property name="visible">True</property>
             <property name="valign">center</property>
             <property name="action-name">win.open</property>
-            <property name="tooltip-text" translatable="yes">Open an existing dynamic wallpaper</property>
-            <property name="label" translatable="yes">Open</property>
+            <property name="tooltip-text" translatable="1">Open an existing dynamic wallpaper</property>
+            <property name="label" translatable="1">Open</property>
           </object>
         </child>
-
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="orientation">horizontal</property>
             <child>
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">win.undo</property>
-                <property name="tooltip_text" translatable="yes">Undo</property>
+                <property name="tooltip_text" translatable="1">Undo</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -57,7 +48,7 @@
               <object class="GtkButton">
                 <property name="visible">True</property>
                 <property name="action-name">win.redo</property>
-                <property name="tooltip_text" translatable="yes">Redo</property>
+                <property name="tooltip_text" translatable="1">Redo</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -66,17 +57,16 @@
                 </child>
               </object>
             </child>
-            <style><class name="linked"/></style>
+            <style>
+              <class name="linked"/>
+            </style>
           </object>
         </child>
-
-        <!-- Title of the window here -->
-
-        <child>
+        <child type="end">
           <object class="GtkMenuButton" id="menu_btn">
-            <property name="valign">center</property>
             <property name="visible">True</property>
-            <property name="tooltip-text" translatable="yes">More actions</property>
+            <property name="valign">center</property>
+            <property name="tooltip-text" translatable="1">More actions</property>
             <child>
               <object class="GtkImage">
                 <property name="visible">True</property>
@@ -84,15 +74,11 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
         </child>
-
-        <child>
+        <child type="end">
           <object class="GtkMenuButton" id="apply_btn">
             <property name="visible">True</property>
-            <property name="tooltip-text" translatable="yes">Save the file and apply it as your wallpaper</property>
+            <property name="tooltip-text" translatable="1">Save the file and apply it as your wallpaper</property>
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -100,7 +86,7 @@
                 <child>
                   <object class="GtkLabel">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Save and apply</property>
+                    <property name="label" translatable="1">Save and apply</property>
                   </object>
                 </child>
                 <child>
@@ -112,29 +98,23 @@
               </object>
             </child>
           </object>
-          <packing>
-            <property name="pack-type">end</property>
-          </packing>
         </child>
-
       </object>
     </child>
-
-    <!-- End of the headerbar ********************************************** -->
-
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
         <property name="orientation">vertical</property>
-
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="expand">False</property>
-            <property name="orientation">horizontal</property>
-            <property name="margin">6</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+            <property name="margin-top">6</property>
+            <property name="margin-bottom">6</property>
             <property name="spacing">8</property>
-
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
@@ -142,36 +122,40 @@
                   <object class="GtkButton" id="label_add_pic">
                     <property name="visible">True</property>
                     <property name="action-name">win.add</property>
-                    <property name="label" translatable="yes">Add pictures</property>
-                    <style><class name="suggested-action"/></style>
+                    <property name="label" translatable="1">Add pictures</property>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="icon_add_pic">
-                    <property name="visible">True</property>
+                    <property name="visible">False</property>
                     <property name="action-name">win.add</property>
-                    <property name="tooltip_text" translatable="yes">Add pictures</property>
+                    <property name="tooltip_text" translatable="1">Add pictures</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
                         <property name="icon-name">list-add-symbolic</property>
                       </object>
                     </child>
-                    <style><class name="suggested-action"/></style>
+                    <style>
+                      <class name="suggested-action"/>
+                    </style>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="label_add_dir">
                     <property name="visible">True</property>
                     <property name="action-name">win.add_folder</property>
-                    <property name="label" translatable="yes">Add a folder</property>
+                    <property name="label" translatable="1">Add a folder</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="icon_add_dir">
-                    <property name="visible">False</property>
+                    <property name="visible">True</property>
                     <property name="action-name">win.add_folder</property>
-                    <property name="tooltip_text" translatable="yes">Add a folder</property>
+                    <property name="tooltip_text" translatable="1">Add a folder</property>
                     <child>
                       <object class="GtkImage">
                         <property name="visible">True</property>
@@ -180,17 +164,18 @@
                     </child>
                   </object>
                 </child>
-                <style><class name="linked"/></style>
+                <style>
+                  <class name="linked"/>
+                </style>
               </object>
             </child>
-
             <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkMenuButton" id="time_options_btn">
                     <property name="visible">True</property>
-                    <property name="tooltip-text" translatable="yes">Manage how you set the durations of your pictures</property>
+                    <property name="tooltip-text" translatable="1">Manage how you set the durations of your pictures</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -198,7 +183,7 @@
                         <child>
                           <object class="GtkLabel">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Durations options</property>
+                            <property name="label" translatable="1">Durations options</property>
                           </object>
                         </child>
                         <child>
@@ -214,7 +199,7 @@
                 <child>
                   <object class="GtkMenuButton" id="start_btn">
                     <property name="visible">True</property>
-                    <property name="tooltip-text" translatable="yes">Set the exact start time of the wallpaper</property>
+                    <property name="tooltip-text" translatable="1">Set the exact start time of the wallpaper</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -235,16 +220,17 @@
                     </child>
                   </object>
                 </child>
-                <style><class name="linked"/></style>
+                <style>
+                  <class name="linked"/>
+                </style>
               </object>
             </child>
-
             <child>
               <object class="GtkButton">
-                <property name="valign">center</property>
                 <property name="visible">True</property>
-                    <property name="action-name">win.sort-pics</property>
-                <property name="tooltip-text" translatable="yes">Sort by name</property>
+                <property name="valign">center</property>
+                <property name="action-name">win.sort-pics</property>
+                <property name="tooltip-text" translatable="1">Sort by name</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -252,16 +238,12 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkButton" id="find_btn_open">
                 <property name="visible">True</property>
                 <property name="action-name">win.find</property>
-                <property name="tooltip-text" translatable="yes">Find a picture</property>
+                <property name="tooltip-text" translatable="1">Find a picture</property>
                 <child>
                   <object class="GtkImage">
                     <property name="visible">True</property>
@@ -269,18 +251,14 @@
                   </object>
                 </child>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
-
             <child>
               <object class="GtkBox" id="search_box">
                 <property name="visible">True</property>
                 <child>
                   <object class="GtkSearchEntry" id="search_entry">
                     <property name="visible">True</property>
-                    <property name="placeholder-text" translatable="yes">Find a picture</property>
+                    <property name="placeholder-text" translatable="1">Find a picture</property>
                   </object>
                 </child>
                 <child>
@@ -295,32 +273,26 @@
                     </child>
                   </object>
                 </child>
-                <style><class name="linked"/></style>
+                <style>
+                  <class name="linked"/>
+                </style>
               </object>
-              <packing>
-                <property name="pack-type">end</property>
-              </packing>
             </child>
-
           </object>
         </child>
-
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="expand">False</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
           </object>
         </child>
-
-        <!-- End of the toolbar ******************************************** -->
-
         <child>
           <object class="GtkInfoBar" id="info_bar">
             <property name="visible">True</property>
-            <property name="show-close-button">True</property>
-            <property name="revealed">True</property>
+            <property name="show-close-button">1</property>
             <property name="message-type">error</property>
-            <child internal-child="content_area">
+            <child>
               <object class="GtkBox">
                 <property name="visible">True</property>
                 <property name="spacing">10</property>
@@ -329,117 +301,111 @@
                     <property name="visible">True</property>
                     <property name="icon-name">dialog-error-symbolic</property>
                   </object>
-                  <packing>
-                    <property name="pack-type">start</property>
-                  </packing>
                 </child>
                 <child>
                   <object class="GtkLabel" id="notification_label">
                     <property name="visible">True</property>
-                    <property name="wrap">True</property>
-                    <property name="label" translatable="yes">Error starting the application, please report this bug.</property>
+                    <property name="wrap">1</property>
+                    <property name="label" translatable="1">Error starting the application, please report this bug.</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkButton" id="fix_24_btn">
+                    <property name="visible">True</property>
                     <property name="action-name">win.fix_24h</property>
-                    <property name="label" translatable="yes">Automatic fix</property>
-                    <property name="tooltip_text" translatable="yes">Set durations for a total of 24 hours</property>
+                    <property name="label" translatable="1">Automatic fix</property>
+                    <property name="tooltip_text" translatable="1">Set durations for a total of 24 hours</property>
                   </object>
-                  <packing>
-                    <property name="pack-type">end</property>
-                  </packing>
                 </child>
               </object>
             </child>
           </object>
         </child>
-
         <child>
           <object class="GtkBox">
             <property name="visible">True</property>
-            <property name="orientation">horizontal</property>
-            <property name="expand">True</property>
-
+            <property name="hexpand">1</property>
+            <property name="vexpand">1</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolled_window">
-                <property name="visible">True</property>
-                <property name="expand">True</property>
-                <!-- Here will be the view with pics -->
+                <property name="visible">False</property>
+                <property name="hexpand">1</property>
+                <property name="vexpand">1</property>
               </object>
             </child>
-
             <child>
               <object class="GtkSeparator" id="time_box_separator">
-                <property name="visible">False</property>
-                <property name="expand">False</property>
+                <property name="visible">True</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
               </object>
             </child>
-
             <child>
               <object class="GtkBox" id="time_box">
                 <property name="visible">False</property>
-                <property name="expand">False</property>
+                <property name="hexpand">0</property>
+                <property name="vexpand">0</property>
                 <property name="valign">center</property>
                 <property name="orientation">vertical</property>
                 <property name="spacing">15</property>
-                <property name="margin">10</property>
+                <property name="margin-start">10</property>
+                <property name="margin-end">10</property>
+                <property name="margin-top">10</property>
+                <property name="margin-bottom">10</property>
                 <child>
                   <object class="GtkLabel" id="static_label">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Time</property>
+                    <property name="label" translatable="1">Time</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkSpinButton" id="static_time_btn">
                     <property name="visible">True</property>
-                    <property name="expand">False</property>
+                    <property name="hexpand">0</property>
+                    <property name="vexpand">0</property>
                     <property name="adjustment">adjustment_st</property>
-                    <property name="tooltip-text" translatable="yes">Duration of each picture (seconds)</property>
+                    <property name="tooltip-text" translatable="1">Duration of each picture (seconds)</property>
                   </object>
                 </child>
-
                 <child>
                   <object class="GtkSeparator">
                     <property name="visible">True</property>
-                    <property name="expand">False</property>
+                    <property name="hexpand">0</property>
+                    <property name="vexpand">0</property>
                   </object>
                 </child>
-
                 <child>
                   <object class="GtkLabel" id="trans_label">
                     <property name="visible">True</property>
-                    <property name="label" translatable="yes">Transition</property>
+                    <property name="label" translatable="1">Transition</property>
                   </object>
                 </child>
                 <child>
                   <object class="GtkSpinButton" id="trans_time_btn">
                     <property name="visible">True</property>
-                    <property name="expand">False</property>
+                    <property name="hexpand">0</property>
+                    <property name="vexpand">0</property>
                     <property name="adjustment">adjustment_tr</property>
-                    <property name="tooltip-text" translatable="yes">Duration of each transition (seconds)</property>
+                    <property name="tooltip-text" translatable="1">Duration of each transition (seconds)</property>
                   </object>
                 </child>
               </object>
             </child>
           </object>
         </child>
-
         <child>
           <object class="GtkSeparator">
             <property name="visible">True</property>
-            <property name="expand">False</property>
+            <property name="hexpand">0</property>
+            <property name="vexpand">0</property>
           </object>
         </child>
-
         <child>
           <object class="GtkStatusbar" id="status_bar">
             <property name="visible">True</property>
           </object>
         </child>
-
       </object>
     </child>
   </template>
 </interface>
-

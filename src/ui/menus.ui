@@ -1,6 +1,6 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface domain="dynamic-wallpaper-editor">
-
+  <requires lib="gtk" version="4.0"/>
   <menu id="primary-menu">
     <section>
       <item>
@@ -38,9 +38,6 @@
       </item>
     </section>
   </menu>
-
-  <!-- * -->
-
   <menu id="save-and-apply-menu">
     <section>
       <item>
@@ -60,11 +57,6 @@
       <submenu id="apply-menu">
         <attribute name="label" translatable="yes">Wallpaper adjustment</attribute>
         <section>
-          <!-- <item> -->
-          <!--   <attribute name="action">app.wp_options</attribute> -->
-          <!--   <attribute name="label" translatable="yes">None</attribute> -->
-          <!--   <attribute name="target">none</attribute> -->
-          <!-- </item> -->
           <item>
             <attribute name="action">app.wp_options</attribute>
             <attribute name="label" translatable="yes">Mosaic</attribute>
@@ -99,9 +91,6 @@
       </submenu>
     </section>
   </menu>
-
-  <!-- * -->
-
   <menu id="time-options-menu">
     <section>
       <item>
@@ -124,6 +113,4 @@
       </item>
     </section>
   </menu>
-
 </interface>
-

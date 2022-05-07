@@ -1,14 +1,13 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <interface domain="dynamic-wallpaper-editor">
+  <requires lib="gtk" version="4.0"/>
   <menu id="pic-menu">
-
     <section>
       <item>
         <attribute name="action">win.pic_replace</attribute>
         <attribute name="label" translatable="yes">Replace with…</attribute>
       </item>
     </section>
-
     <section>
       <item>
         <attribute name="action">win.pic_open</attribute>
@@ -19,7 +18,6 @@
         <attribute name="label" translatable="yes">View containing directory</attribute>
       </item>
     </section>
-
     <section>
       <attribute name="display-hint">horizontal-buttons</attribute>
       <item>
@@ -43,7 +41,5 @@
         <attribute name="verb-icon">go-bottom-symbolic</attribute>
       </item>
     </section>
-
   </menu>
 </interface>
-

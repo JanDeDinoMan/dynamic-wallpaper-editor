@@ -33,32 +33,32 @@ class DWEWindow(Gtk.ApplicationWindow):
 
 	_settings = Gio.Settings.new('com.github.maoschanz.DynamicWallpaperEditor')
 
-	menu_btn = Gtk.Template.Child()
+	menu_btn = Gtk.Template.Child("menu_btn")
 
-	start_btn = Gtk.Template.Child()
-	apply_btn = Gtk.Template.Child()
-	time_options_btn = Gtk.Template.Child()
+	start_btn = Gtk.Template.Child("start_btn")
+	apply_btn = Gtk.Template.Child("apply_btn")
+	time_options_btn = Gtk.Template.Child("time_options_btn")
 
-	label_add_pic = Gtk.Template.Child()
-	icon_add_pic = Gtk.Template.Child()
-	label_add_dir = Gtk.Template.Child()
-	icon_add_dir = Gtk.Template.Child()
+	label_add_pic = Gtk.Template.Child("label_add_pic")
+	icon_add_pic = Gtk.Template.Child("icon_add_pic")
+	label_add_dir = Gtk.Template.Child("label_add_dir")
+	icon_add_dir = Gtk.Template.Child("icon_add_dir")
 
-	find_btn_open = Gtk.Template.Child()
-	search_box = Gtk.Template.Child()
-	search_entry = Gtk.Template.Child()
+	find_btn_open = Gtk.Template.Child("find_btn_open")
+	search_box = Gtk.Template.Child("search_box")
+	search_entry = Gtk.Template.Child("search_entry")
 
-	scrolled_window = Gtk.Template.Child()
+	scrolled_window = Gtk.Template.Child("scrolled_window")
 
-	trans_time_btn = Gtk.Template.Child()
-	static_time_btn = Gtk.Template.Child()
-	time_box_separator = Gtk.Template.Child()
-	time_box = Gtk.Template.Child()
+	trans_time_btn = Gtk.Template.Child("trans_time_btn")
+	static_time_btn = Gtk.Template.Child("static_time_btn")
+	time_box_separator = Gtk.Template.Child("time_box_separator")
+	time_box = Gtk.Template.Child("time_box")
 
-	info_bar = Gtk.Template.Child()
-	fix_24_btn = Gtk.Template.Child()
-	notification_label = Gtk.Template.Child()
-	status_bar = Gtk.Template.Child()
+	info_bar = Gtk.Template.Child("info_bar")
+	fix_24_btn = Gtk.Template.Child("fix_24_btn")
+	notification_label = Gtk.Template.Child("notification_label")
+	status_bar = Gtk.Template.Child("status_bar")
 
 	def __init__(self, **kwargs):
 		super().__init__(**kwargs)
@@ -70,10 +70,12 @@ class DWEWindow(Gtk.ApplicationWindow):
 		self._is_saved = True # FIXME moche + mal implémenté
 
 		# Used in the "add pictures" file chooser dialog
-		self.preview_picture = Gtk.Image(margin_right=5)
+		#self.preview_picture = Gtk.Image(margin_right=5)
+		self.preview_picture = Gtk.Image()
+		print(self.menu_btn)
 
 		# Connect signals
-		self.connect('delete-event', self.action_close)
+		#self.connect('delete-event', self.action_close)
 		self.trans_time_btn.connect('value-changed', self.on_time_change)
 		self.static_time_btn.connect('value-changed', self.on_time_change)
 		self.info_bar.connect('close', self.close_notification)
@@ -208,10 +210,12 @@ class DWEWindow(Gtk.ApplicationWindow):
 	def set_addpic_compact(self, state):
 		self.label_add_pic.set_visible(not state)
 		self.icon_add_pic.set_visible(state)
+		return
 
 	def set_adddir_compact(self, state):
 		self.label_add_dir.set_visible(not state)
 		self.icon_add_dir.set_visible(state)
+		return
 
 	############################################################################
 	# Wallpaper type ###########################################################
@@ -298,8 +302,8 @@ class DWEWindow(Gtk.ApplicationWindow):
 
 	def update_global_time_box(self, is_global, is_daylight):
 		"""Show relevant spinbuttons based on the active options."""
-		# is_global = self.get_action_boolean_state('same_duration')
-		# is_daylight = self.get_action_boolean_state('total_24')
+		is_global = self.get_action_boolean_state('same_duration')
+		is_daylight = self.get_action_boolean_state('total_24')
 		self.time_box.set_visible(is_global)
 		self.time_box_separator.set_visible(is_global)
 		self.view.update_to_mode(is_global, is_daylight)
