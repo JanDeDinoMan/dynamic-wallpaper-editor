@@ -21,7 +21,7 @@
     <property name="hexpand">True</property>
     <property name="vexpand">True</property>
     <child>
-      <object class="GtkImage" id="pic_thumbnail">
+      <object class="GtkPicture" id="pic_thumbnail">
         <property name="hexpand">0</property>
         <property name="halign">GTK_ALIGN_START</property>
       </object>

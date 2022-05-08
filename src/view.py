@@ -35,11 +35,11 @@ class DWEAbstractView():
 		self.window.scrolled_window.set_child(widget)
 
 	def destroy(self):
-		for w in self.children:
-			w.destroy()
-		child = self.window.scrolled_window.get_child()
-		self.window.scrolled_window.remove(child)
-		child.destroy()
+		# for w in self.children:
+		# 	w.destroy()
+		# child = self.window.scrolled_window.get_child()
+		# self.window.scrolled_window.remove(child) #TODO FIND REPLACEMENT!
+		return
 
 	def set_unsaved(self):
 		self.window._is_saved = False

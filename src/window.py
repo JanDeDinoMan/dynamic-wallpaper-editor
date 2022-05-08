@@ -186,7 +186,7 @@ class DWEWindow(Gtk.ApplicationWindow):
 		action_display = Gio.SimpleAction().new_stateful('display-mode', \
 		                                   GLib.VariantType.new('s'),
 		                                   GLib.Variant.new_string(saved_value))
-		action_display.connect('change-state', self.on_view_changed)
+		# action_display.connect('change-state', self.on_view_changed) #TODO CHECK IF NESS!
 		self.add_action(action_display)
 
 		self.add_action_boolean('same_duration', False, self.update_type_slideshow)

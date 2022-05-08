@@ -46,7 +46,7 @@ class DWEPictureWidget(Gtk.Box):
 		# File name
 		self.label_widget = builder.get_object('pic_label')
 		self.label_widget.set_ellipsize(Pango.EllipsizeMode.START)
-		GLib.timeout_add(500, self.update_for_current_file, {})
+		self.update_for_current_file() #TODO VERIFY IF CORRECT
 
 		# Schedule labels
 		self.static_label = builder.get_object('static_label')
@@ -120,16 +120,12 @@ class DWEPictureWidget(Gtk.Box):
 	def generate_thumbnail(self, w, h):
 		self.time_box.set_sensitive(True)
 		try:
-			# This size is totally arbitrary.
-			pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(self.filename, w, h, True)
-			self.image.set_from_pixbuf(pixbuf)
+			self.image.set_filename(self.filename)
 		except Exception:
 			if self.filename[:6] != '/home/':
-				self.image.set_from_icon_name('face-uncertain-symbolic', Gtk.IconSize.DIALOG)
 				self.set_tooltip_text(_("This picture might exist, but " + \
 				             "it isn't in your home folder so I can't see it."))
 			else:
-				self.image.set_from_icon_name('dialog-error-symbolic', Gtk.IconSize.DIALOG)
 				self.set_tooltip_text(_("This picture doesn't exist"))
 				self.time_box.set_sensitive(False)
 
