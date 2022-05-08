@@ -75,7 +75,7 @@ class DWEWindow(Gtk.ApplicationWindow):
 		print(self.menu_btn)
 
 		# Connect signals
-		#self.connect('delete-event', self.action_close)
+		self.connect('close-request', self.action_close)
 		self.trans_time_btn.connect('value-changed', self.on_time_change)
 		self.static_time_btn.connect('value-changed', self.on_time_change)
 		self.info_bar.connect('close', self.close_notification)
@@ -393,6 +393,7 @@ class DWEWindow(Gtk.ApplicationWindow):
 		return False # if cancelled or closed
 
 	def on_view_changed(self, *args):
+		print("STATE CHANGE:", args)
 		state_as_string = args[1].get_string()
 		args[0].set_state(GLib.Variant.new_string(state_as_string))
 		self._settings.set_string('display-mode', state_as_string)
