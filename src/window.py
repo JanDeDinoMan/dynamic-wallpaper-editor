@@ -186,7 +186,7 @@ class DWEWindow(Gtk.ApplicationWindow):
 		action_display = Gio.SimpleAction().new_stateful('display-mode', \
 		                                   GLib.VariantType.new('s'),
 		                                   GLib.Variant.new_string(saved_value))
-		# action_display.connect('change-state', self.on_view_changed) #TODO CHECK IF NESS!
+		action_display.connect('change-state', self.on_view_changed) #TODO CHECK IF NESS!
 		self.add_action(action_display)
 
 		self.add_action_boolean('same_duration', False, self.update_type_slideshow)
@@ -393,9 +393,15 @@ class DWEWindow(Gtk.ApplicationWindow):
 		return False # if cancelled or closed
 
 	def on_view_changed(self, *args):
-		print("STATE CHANGE:", args)
 		state_as_string = args[1].get_string()
+
+		if self._settings.get_string('display-mode') == state_as_string:
+			#TODO FIX THIS
+			#THis is bad, but will work for now. the state didn't change we are being pranked
+			return
+		print("STATE CHANGE:", args)
 		args[0].set_state(GLib.Variant.new_string(state_as_string))
+
 		self._settings.set_string('display-mode', state_as_string)
 		self.rebuild_view()
 
