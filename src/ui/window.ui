@@ -328,7 +328,7 @@
             <property name="vexpand">1</property>
             <child>
               <object class="GtkScrolledWindow" id="scrolled_window">
-                <property name="visible">False</property>
+                <property name="visible">True</property>
                 <property name="hexpand">1</property>
                 <property name="vexpand">1</property>
               </object>

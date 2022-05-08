@@ -30,8 +30,8 @@ class DWEAbstractView():
 		self.searched_str = ""
 
 	def _add_list_container(self, widget):
-		widget.set_sort_func(self.sort_view)
-		widget.set_filter_func(self.filter_view)
+		# widget.set_sort_func(self.sort_view)
+		# widget.set_filter_func(self.filter_view)
 		self.window.scrolled_window.set_child(widget)
 
 	def destroy(self):

@@ -39,7 +39,6 @@ class DWEPictureWidget(Gtk.Box):
 		builder = Gtk.Builder().new_from_resource(UI_PATH + template)
 		pic_box = builder.get_object("pic_box")
 		self.time_box = builder.get_object('time_box')
-
 		# Thumbnail
 		self.image = builder.get_object('pic_thumbnail')
 		# self.generate_thumbnail() will be called later by self.update_for_current_file
@@ -80,8 +79,8 @@ class DWEPictureWidget(Gtk.Box):
 		# self.drag_dest_set(Gtk.DestDefaults.ALL, [], Gdk.DragAction.MOVE)
 		# self.connect('drag-data-received', self.on_drag_data_received)
 		# self.drag_dest_add_text_targets()
-		print("Picbox:", pic_box)
-		self.append(pic_box)
+		self.image.set_size_request(100,100)
+		self.append(builder.get_object("all"))
 		return builder
 
 	def end_build_ui(self):
