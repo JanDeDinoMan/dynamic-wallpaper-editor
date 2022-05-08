@@ -35,7 +35,6 @@ class DWEPictureWidget(Gtk.Box):
 		self._transition_time_lock = False
 
 	def build_ui(self, stt, trt, template, w, h):
-		print("temlate: ", template)
 		builder = Gtk.Builder().new_from_resource(UI_PATH + template)
 		pic_box = builder.get_object("pic_box")
 		self.time_box = builder.get_object('time_box')

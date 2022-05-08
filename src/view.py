@@ -55,14 +55,11 @@ class DWEAbstractView():
 
 	def update(self, dw_data):
 		widgets = self.children
-		print(dw_data)
 		delta_removed = []
 		delta_added = []
-		print("widgets", widgets)
 		for p in dw_data['pictures']:
 			delta_added.append(p['pic_id'])
 		for w in widgets:
-			print("w", w)
 			widget_pic_id = w.pic_id
 			if widget_pic_id in delta_added:
 				delta_added.remove(widget_pic_id)
@@ -73,7 +70,6 @@ class DWEAbstractView():
 
 		for w in widgets:
 			row = w
-			print("row", row)
 			if row.pic_id in delta_removed:
 				self.get_view_widget().remove(w)
 				w.destroy()
@@ -198,7 +194,6 @@ class DWEAbstractView():
 	def get_view_total_time(self):
 		total_time = 0
 		for w in self.children:
-			print("w", w)
 			row = w
 			total_time += row.static_time_btn.get_value()
 			total_time += row.trans_time_btn.get_value()
@@ -286,7 +281,6 @@ class DWERowsView(DWEAbstractView):
 		             label=_("Add new pictures, or open an existing XML file."))
 		self.list_box.set_placeholder(label)
 		self._add_list_container(self.list_box)
-		print("size", self.list_box.get_width())
 
 	def get_view_widget(self):
 		return self.list_box
