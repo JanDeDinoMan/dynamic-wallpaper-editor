@@ -326,7 +326,7 @@ class DWEThumbnailsView(DWEAbstractView):
 	def _add_one_picture(self, pic_structure):
 		self.set_unsaved()
 		pic = DWEPictureThumbnail(pic_structure, self.window)
-		self.flow_box.add(pic)
+		self.flow_box.append(pic)
 		self.children.append(pic)
 
 	############################################################################

@@ -78,8 +78,7 @@ class DWEPictureWidget(Gtk.Box):
 		# self.drag_dest_set(Gtk.DestDefaults.ALL, [], Gdk.DragAction.MOVE)
 		# self.connect('drag-data-received', self.on_drag_data_received)
 		# self.drag_dest_add_text_targets()
-		self.image.set_size_request(100,100)
-		self.append(builder.get_object("all"))
+		self.append(builder.get_object("pic_box"))
 		return builder
 
 	def end_build_ui(self):
@@ -119,7 +118,7 @@ class DWEPictureWidget(Gtk.Box):
 	def generate_thumbnail(self, w, h):
 		self.time_box.set_sensitive(True)
 		try:
-			self.image.set_filename(self.filename)
+			self.image.set_from_file(self.filename)
 		except Exception:
 			if self.filename[:6] != '/home/':
 				self.set_tooltip_text(_("This picture might exist, but " + \
