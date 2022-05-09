@@ -12,77 +12,73 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkEventBox" id="pic_box">
-    <property name="visible">True</property>
-    <property name="expand">True</property>
+  <object class="GtkBox" id="pic_box">
+    <property name="spacing">4</property>
+    <property name="margin-start">4</property>
+    <property name="margin-end">4</property>
+    <property name="margin-top">4</property>
+    <property name="margin-bottom">4</property>
+    <property name="vexpand">True</property>
+    <property name="hexpand">True</property>
+    <property name="orientation">vertical</property>
+    <child>
+      <object class="GtkImage" id="pic_thumbnail">
+        <property name="hexpand">1</property>
+        <property name="vexpand">1</property>
+        <property name="valign">start</property>
+        <property name="height-request">172</property>
+      </object>
+    </child>
     <child>
       <object class="GtkBox">
-        <property name="spacing">4</property>
-        <property name="margin-start">4</property>
-        <property name="margin-end">4</property>
-        <property name="margin-top">4</property>
-        <property name="margin-bottom">4</property>
-        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <property name="halign">center</property>
         <child>
-          <object class="GtkImage" id="pic_thumbnail">
-            <property name="hexpand">0</property>
-            <property name="vexpand">0</property>
+          <object class="GtkMenuButton" id="time_btn">
+            <property name="valign">center</property>
+            <property name="popover">time_popover</property>
+            <child>
+              <object class="GtkBox">
+                <property name="spacing">2</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="1">Duration</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">pan-down-symbolic</property>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
         </child>
         <child>
-          <object class="GtkBox">
-            <property name="spacing">2</property>
+          <object class="GtkLabel" id="alt_label">
+            <property name="label">file name</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="delete_btn">
+            <property name="valign">center</property>
+            <property name="tooltip_text" translatable="1">Delete</property>
+            <style>
+              <class name="destructive-action"/>
+            </style>
             <child>
-              <object class="GtkMenuButton" id="time_btn">
-                <property name="relief">none</property>
-                <property name="valign">center</property>
-                <property name="popover">time_popover</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="spacing">2</property>
-                    <child>
-                      <object class="GtkLabel">
-                        <property name="label" translatable="1">Duration</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImage">
-                        <property name="icon-name">pan-down-symbolic</property>
-                      </object>
-                    </child>
-                  </object>
-                </child>
+              <object class="GtkImage">
+                <property name="icon-name">edit-delete-symbolic</property>
               </object>
             </child>
+          </object>
+        </child>
+        <child>
+          <object class="GtkMenuButton" id="menu_btn">
+            <property name="valign">center</property>
             <child>
-              <object class="GtkLabel" id="alt_label">
-                <property name="label">file name</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="delete_btn">
-                <property name="relief">none</property>
-                <property name="valign">center</property>
-                <property name="tooltip_text" translatable="1">Delete</property>
-                <style>
-                  <class name="destructive-action"/>
-                </style>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">edit-delete-symbolic</property>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuButton" id="menu_btn">
-                <property name="relief">none</property>
-                <property name="valign">center</property>
-                <child>
-                  <object class="GtkImage">
-                    <property name="icon-name">view-more-symbolic</property>
-                  </object>
-                </child>
+              <object class="GtkImage">
+                <property name="icon-name">view-more-symbolic</property>
               </object>
             </child>
           </object>
@@ -91,7 +87,6 @@
     </child>
   </object>
   <object class="GtkPopover" id="time_popover">
-    <property name="visible">True</property>
     <property name="child">
       <object class="GtkBox">
         <property name="margin-start">6</property>
