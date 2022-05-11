@@ -19,6 +19,7 @@ from gi.repository import Gtk
 
 from .picture_widget import DWEPictureRow
 from .picture_widget import DWEPictureThumbnail
+from .custom_box_widget import CustomListBox, CustomFlowBox
 
 class DWEAbstractView():
 	__gtype_name__ = 'DWEAbstractView'
@@ -26,20 +27,20 @@ class DWEAbstractView():
 	def __init__(self, window):
 		self.window = window
 		self._length = 0
-		self.children = []
 		self.searched_str = ""
 
 	def _add_list_container(self, widget):
-		# widget.set_sort_func(self.sort_view)
-		# widget.set_filter_func(self.filter_view)
+		widget.set_sort_func(self.sort_view)
+		widget.set_filter_func(self.filter_view)
 		self.window.scrolled_window.set_child(widget)
 
 	def destroy(self):
-		# for w in self.children:
-		# 	w.destroy()
-		# child = self.window.scrolled_window.get_child()
-		# self.window.scrolled_window.remove(child) #TODO FIND REPLACEMENT!
-		return
+		view_widget = self.get_view_widget()
+		for w in view_widget.get_children():
+			view_widget.remove(w)
+		child = self.window.scrolled_window.get_child()
+		self.window.scrolled_window.set_child(None)
+		# child.destroy()
 
 	def set_unsaved(self):
 		self.window._is_saved = False
@@ -49,18 +50,19 @@ class DWEAbstractView():
 			label = _("Add new pictures, or open an existing XML file.")
 		else:
 			label = _("Drag-and-drop pictures to reorder them.")
+		#TODO FIX THIS USING BOX :)
 		# self.window.get_titlebar().set_subtitle(label)
 
 	############################################################################
 
 	def update(self, dw_data):
-		widgets = self.children
+		widgets = self.get_view_widget().get_children()
 		delta_removed = []
 		delta_added = []
 		for p in dw_data['pictures']:
 			delta_added.append(p['pic_id'])
 		for w in widgets:
-			widget_pic_id = w.pic_id
+			widget_pic_id = w.get_child().pic_id
 			if widget_pic_id in delta_added:
 				delta_added.remove(widget_pic_id)
 			delta_removed.append(widget_pic_id)
@@ -69,10 +71,10 @@ class DWEAbstractView():
 				delta_removed.remove(p['pic_id'])
 
 		for w in widgets:
-			row = w
+			row = w.get_child()
 			if row.pic_id in delta_removed:
 				self.get_view_widget().remove(w)
-				w.destroy()
+				# w.destroy()
 			else:
 				for p in dw_data['pictures']:
 					if p['pic_id'] == row.pic_id:
@@ -88,7 +90,7 @@ class DWEAbstractView():
 				self._add_one_picture(pic)
 
 		self.get_view_widget().invalidate_sort()
-		self._length = len(self.children)
+		self._length = len(self.get_view_widget().get_children())
 		self.update_subtitle(self._length == 0)
 		self.window.update_status()
 
@@ -98,7 +100,7 @@ class DWEAbstractView():
 		pass
 
 	def get_pic_at(self, index):
-		return self.children[index]
+		return self.get_view_widget().get_children()[index].get_child()
 
 	def sort_view(self, pic1, pic2, *args):
 		"""Returns int < 0 if pic1 should be before pic2, 0 if they are equal
@@ -106,16 +108,16 @@ class DWEAbstractView():
 		return pic1.get_child().indx - pic2.get_child().indx
 
 	def sort_by_name(self):
-		rows = self.children
+		rows = self.get_view_widget().get_children()
 		images_list = []
 		for r in rows:
-			images_list.append(r.filename)
+			images_list.append(r.get_child().filename)
 		sorted_list = sorted(images_list, key=self._filter_nums)
 		new_index = 0
 		for fn in sorted_list:
 			for r in rows:
-				if r.filename == fn:
-					r.indx = new_index
+				if r.get_child().filename == fn:
+					r.get_child().indx = new_index
 			new_index = new_index + 1
 		self.get_view_widget().invalidate_sort()
 
@@ -145,11 +147,10 @@ class DWEAbstractView():
 		pass # Implemented in non-abstract classes
 
 	def get_active_pic(self):
-		rows = self.children
-		#TODO FIX SELECTION
-		# for r in rows:
-			# if r.menu_btn.get_popover().get_visible():
-			# 	return r
+		rows = self.get_view_widget().get_children()
+		for r in rows:
+			if r.get_child().menu_btn.get_popover().get_visible():
+				return r.get_child()
 		# XXX what if nothing is selected?
 		return self.get_selected_child()
 
@@ -193,15 +194,15 @@ class DWEAbstractView():
 
 	def get_view_total_time(self):
 		total_time = 0
-		for w in self.children:
-			row = w
+		for w in self.get_view_widget().get_children():
+			row = w.get_child()
 			total_time += row.static_time_btn.get_value()
 			total_time += row.trans_time_btn.get_value()
 		return total_time
 
 	def update_daylight_timings(self, temp_time):
-		for w in self.children:
-			row = w
+		for w in self.get_view_widget().get_children():
+			row = w.get_child()
 			temp_time = row.update_static_label(temp_time)
 			temp_time = row.update_transition_label(temp_time)
 
@@ -274,9 +275,7 @@ class DWERowsView(DWEAbstractView):
 
 	def __init__(self, window):
 		super().__init__(window)
-		# self.list_box = Gtk.ListBox(visible=True, expand=True)
-		#TODO port the expand
-		self.list_box = Gtk.ListBox(visible=True, hexpand=True, vexpand=True)
+		self.list_box = CustomListBox(vexpand=True, hexpand=True)
 		label = Gtk.Label(visible=True, \
 		             label=_("Add new pictures, or open an existing XML file."))
 		self.list_box.set_placeholder(label)
@@ -294,9 +293,9 @@ class DWERowsView(DWEAbstractView):
 
 	def _add_one_picture(self, pic_structure):
 		self.set_unsaved()
-		row = DWEPictureRow(pic_structure, self.window)
+		row = Gtk.ListBoxRow()
+		row.set_child(DWEPictureRow(pic_structure, self.window))
 		self.list_box.append(row)
-		self.children.append(row)
 
 	############################################################################
 ################################################################################
@@ -306,9 +305,7 @@ class DWEThumbnailsView(DWEAbstractView):
 
 	def __init__(self, window):
 		super().__init__(window)
-		#TODO FIX expand
-		# self.flow_box = Gtk.FlowBox(visible=True, expand=True)
-		self.flow_box = Gtk.FlowBox(visible=True)
+		self.flow_box = CustomFlowBox(vexpand=True, hexpand=True)
 		# label = Gtk.Label(visible=True, \
 		#              label=_("Add new pictures, or open an existing XML file."))
 		# self.flow_box.set_placeholder(label)
@@ -318,17 +315,17 @@ class DWEThumbnailsView(DWEAbstractView):
 		return self.flow_box
 
 	def get_selected_child(self):
-		if len(self.children) == 0:
+		children = self.get_view_widget().get_selected_children()
+		if len(children) == 0:
 			return None
 		else:
-			return self.children[0]
+			return children[0].get_child()
 
 	def _add_one_picture(self, pic_structure):
 		self.set_unsaved()
-		pic = DWEPictureThumbnail(pic_structure, self.window)
+		pic = Gtk.FlowBoxChild()
+		pic.set_child(DWEPictureThumbnail(pic_structure, self.window))
 		self.flow_box.append(pic)
-		self.children.append(pic)
 
 	############################################################################
 ################################################################################
-

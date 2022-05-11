@@ -2,7 +2,7 @@
 <interface domain="dynamic-wallpaper-editor">
   <requires lib="gtk" version="4.0"/>
   <menu id="pic-menu">
-    <section>
+    <section id="test">
       <item>
         <attribute name="action">win.pic_replace</attribute>
         <attribute name="label" translatable="yes">Replace with…</attribute>

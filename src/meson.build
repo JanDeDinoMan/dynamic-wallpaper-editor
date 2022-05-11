@@ -32,7 +32,8 @@ dynamic_wallpaper_editor_sources = [
 	'misc.py',
 	'picture_widget.py',
 	'view.py',
-	'window.py'
+	'window.py',
+	'custom_box_widget.py'
 ]
 
 install_data(dynamic_wallpaper_editor_sources, install_dir: moduledir)
