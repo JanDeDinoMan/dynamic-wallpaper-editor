@@ -85,7 +85,7 @@
               <object class="GtkSpinButton" id="static_btn">
                 <property name="hexpand">False</property>
                 <property name="vexpand">False</property>
-                <property name="tooltip_text" translatable="1">Time (in seconds) of this image. This doesn&apos;t include the time of the transition.</property>
+                <property name="tooltip_text" translatable="1">Time (in seconds) of this image. This doesn't include the time of the transition.</property>
                 <property name="adjustment">adjustment_st</property>
                 <layout>
                   <property name="column">1</property>
